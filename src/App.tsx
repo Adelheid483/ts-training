@@ -3,6 +3,8 @@ import {Card} from "./components/Card";
 import {BrowserRouter, Route, NavLink} from "react-router-dom";
 import {UsersPage} from "./pages/UsersPage";
 import {TodoPage} from "./pages/TodoPage";
+import {UserItemPage} from "./pages/UserItemPage";
+import {TodoItemPage} from "./pages/TodoItemPage";
 
 const App = () => {
     return (
@@ -24,6 +26,8 @@ const App = () => {
 
                 <Route path={'/users'} exact component={UsersPage}/>
                 <Route path={'/todos'} exact component={TodoPage}/>
+                <Route path={'/users/:id'} component={UserItemPage}/>
+                <Route path={'/todos/:id'} component={TodoItemPage}/>
             </section>
         </BrowserRouter>
     );
