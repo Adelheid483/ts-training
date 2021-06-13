@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Card} from "./components/Card";
-import {UserList} from "./components/UserList";
-import {IUser} from "./interfaces";
 import axios from "axios";
+
+import {Card} from "./components/Card";
+import {IUser} from "./interfaces";
+import List from "./components/List";
+import {UserItem} from "./components/UserItem";
 
 const App = () => {
 
@@ -30,7 +32,7 @@ const App = () => {
                 <p>Lorem. Amet aperiam atquxpedita inventore iure
                     molestiae non obcasequi voluptate?</p>
             </Card>
-            <UserList users={userArray}/>
+            <List items={userArray} renderItem={(user: IUser) => <UserItem user={user} key={user.id} />}/>
         </section>
     );
 };
