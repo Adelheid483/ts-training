@@ -6,6 +6,7 @@ import {ITodo, IUser} from "./interfaces";
 import List from "./components/List";
 import {UserItem} from "./components/UserItem";
 import {TodoItem} from "./components/TodoItem";
+import {EventsExample} from "./components/EventsExample";
 
 const App = () => {
 
@@ -33,6 +34,7 @@ const App = () => {
 
     return (
         <section>
+            <EventsExample />
             <Card
                 width='200px'
                 height='200px'
