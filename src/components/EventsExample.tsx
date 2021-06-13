@@ -1,9 +1,10 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 
 export const EventsExample: FC = () => {
 
     const [value, setValue] = useState<string>('');
     const [isDrag, setIsDrag] = useState<boolean>(false);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const styleDrag = {
         width: '400px',
@@ -18,7 +19,9 @@ export const EventsExample: FC = () => {
     };
 
     const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-        console.log(value);
+        console.log('Controlled - ', value);
+        console.log('Uncontrolled - ', inputRef.current!.value);
+        // ! или ? после current - так показываем что что-то будет (типизация ref)
     };
 
     const dragHandler = (e: React.DragEvent<HTMLDivElement>) => {
@@ -45,7 +48,8 @@ export const EventsExample: FC = () => {
 
     return (
         <section>
-            <input type="text" onChange={changeHandler} value={value}/>
+            <input type="text" onChange={changeHandler} value={value} placeholder="Controlled"/>
+            <input type="text" ref={inputRef} placeholder="Uncontrolled"/>
             <button onClick={clickHandler}>Send to Log</button>
             <div style={styleDrag} draggable onDrag={dragHandler}> </div>
             <div
