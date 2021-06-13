@@ -1,18 +1,23 @@
 import React, {FC, useState} from "react";
-import { CardVariant, ICardProps } from "../interfaces";
 
-export const Card: FC<ICardProps> = ({width, height, variant, children, onClick}) => {
+interface CardProps {
+    width: string,
+    height: string,
+    children: React.ReactChild | React.ReactNode,
+    onClickHandler: (num: number) => void,
+}
 
-    const [state, setState] = useState(0);
+export const Card: FC<CardProps> = ({width, height, children, onClickHandler}) => {
+
+    const [stateNum, setStateNum] = useState(0);
+
+    const stylesDiv = {
+        width,
+        height,
+        border: '2px solid blue'
+    };
 
     return (
-        <div style={{width, height, 
-            border: variant === CardVariant.outlined ? '1px solid grey' : 'none',
-            background: variant === CardVariant.primary ? 'pink' : ''
-        }}
-            onClick={() => onClick(state)}
-        >
-            {children}
-        </div>
+        <div style={stylesDiv} onClick={() => onClickHandler(stateNum)}>{children}</div>
     );
-}; 
+};
