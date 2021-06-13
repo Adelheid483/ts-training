@@ -2,23 +2,33 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 import {Card} from "./components/Card";
-import {IUser} from "./interfaces";
+import {ITodo, IUser} from "./interfaces";
 import List from "./components/List";
 import {UserItem} from "./components/UserItem";
+import {TodoItem} from "./components/TodoItem";
 
 const App = () => {
 
     const [userArray, setUserArray] = useState<IUser[]>([]);
+    const [todoArray, setTodoArray] = useState<ITodo[]>([]);
 
-    useEffect(() => {fetchUsers()}, []);
+    useEffect(() => {
+        fetchUsers();
+        fetchTodos();
+    }, []);
 
     async function fetchUsers() {
         try {
             const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
             setUserArray(response.data)
-        } catch (e) {
-            alert(e)
-        }
+        } catch (e) {alert(e)}
+    }
+
+    async function fetchTodos() {
+        try {
+            const response = await axios.get<ITodo[]>('https://jsonplaceholder.typicode.com/todos');
+            setTodoArray(response.data)
+        } catch (e) {alert(e)}
     }
 
     return (
@@ -33,6 +43,7 @@ const App = () => {
                     molestiae non obcasequi voluptate?</p>
             </Card>
             <List items={userArray} renderItem={(user: IUser) => <UserItem user={user} key={user.id} />}/>
+            <List items={todoArray} renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id} />}/>
         </section>
     );
 };
