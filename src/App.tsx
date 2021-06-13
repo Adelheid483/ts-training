@@ -1,6 +1,8 @@
 import React from "react";
-import {Card} from "./components/Card";
 import {BrowserRouter, Route, NavLink} from "react-router-dom";
+
+import {Card} from "./components/Card";
+import {EventsExample} from "./components/EventsExample";
 import {UsersPage} from "./pages/UsersPage";
 import {TodoPage} from "./pages/TodoPage";
 import {UserItemPage} from "./pages/UserItemPage";
@@ -14,6 +16,7 @@ const App = () => {
                     <NavLink to='/users' style={{marginRight: '20px'}}>Users</NavLink>
                     <NavLink to='/todos'>Todos</NavLink>
                 </nav>
+                <EventsExample />
                 <Card
                     width='200px'
                     height='200px'
