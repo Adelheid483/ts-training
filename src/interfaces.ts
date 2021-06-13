@@ -10,3 +10,9 @@ export interface IAddress {
     city: string;
     zipcode: string;
 }
+
+export interface ITodo {
+    id: number;
+    title: string;
+    completed: boolean;
+}

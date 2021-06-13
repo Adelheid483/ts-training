@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 
 // T значит что этот дженерик мб любого типа
 interface ListProps<T> {
