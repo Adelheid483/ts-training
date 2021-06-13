@@ -1,50 +1,31 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-
+import React from "react";
 import {Card} from "./components/Card";
-import {ITodo, IUser} from "./interfaces";
-import List from "./components/List";
-import {UserItem} from "./components/UserItem";
-import {TodoItem} from "./components/TodoItem";
+import {BrowserRouter, Route, NavLink} from "react-router-dom";
+import {UsersPage} from "./pages/UsersPage";
+import {TodoPage} from "./pages/TodoPage";
 
 const App = () => {
-
-    const [userArray, setUserArray] = useState<IUser[]>([]);
-    const [todoArray, setTodoArray] = useState<ITodo[]>([]);
-
-    useEffect(() => {
-        fetchUsers();
-        fetchTodos();
-    }, []);
-
-    async function fetchUsers() {
-        try {
-            const response = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
-            setUserArray(response.data)
-        } catch (e) {alert(e)}
-    }
-
-    async function fetchTodos() {
-        try {
-            const response = await axios.get<ITodo[]>('https://jsonplaceholder.typicode.com/todos');
-            setTodoArray(response.data)
-        } catch (e) {alert(e)}
-    }
-
     return (
-        <section>
-            <Card
-                width='200px'
-                height='200px'
-                onClickHandler={(num) => console.log('Click', num)}
-            >
-                <button>Btn</button>
-                <p>Lorem. Amet aperiam atquxpedita inventore iure
-                    molestiae non obcasequi voluptate?</p>
-            </Card>
-            <List items={userArray} renderItem={(user: IUser) => <UserItem user={user} key={user.id} />}/>
-            <List items={todoArray} renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id} />}/>
-        </section>
+        <BrowserRouter>
+            <section>
+                <nav style={{background: 'lightgrey', padding: '10px 0'}}>
+                    <NavLink to='/users' style={{marginRight: '20px'}}>Users</NavLink>
+                    <NavLink to='/todos'>Todos</NavLink>
+                </nav>
+                <Card
+                    width='200px'
+                    height='200px'
+                    onClickHandler={(num) => console.log('Click', num)}
+                >
+                    <button>Btn</button>
+                    <p>Lorem. Amet aperiam atquxpedita inventore iure
+                        molestiae non obcasequi voluptate?</p>
+                </Card>
+
+                <Route path={'/users'} exact component={UsersPage}/>
+                <Route path={'/todos'} exact component={TodoPage}/>
+            </section>
+        </BrowserRouter>
     );
 };
 
